@@ -1,5 +1,6 @@
 {{- $manualHTTPS := and .Values.proxy.https.enabled (eq .Values.proxy.https.type "manual") -}}
 {{- $manualHTTPSwithsecret := and .Values.proxy.https.enabled (eq .Values.proxy.https.type "secret") -}}
+{{- if .Values.proxy.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -166,3 +167,4 @@ spec:
       {{- with .Values.proxy.chp.extraPodSpec }}
       {{- . | toYaml | nindent 6 }}
       {{- end }}
+{{- end }}
